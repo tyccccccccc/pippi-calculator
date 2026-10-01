@@ -17,20 +17,21 @@ st.markdown(
     """
     <style>
     :root {
-        --cream: #fffdf4;
-        --leaf: #3f9656;
-        --leaf-dark: #256b3a;
-        --leaf-soft: #edf7e9;
-        --sun: #fff1ad;
-        --ink: #183126;
-        --muted: #728078;
-        --line: #dce8d9;
+        --cream: #171020;
+        --leaf: #9bd36a;
+        --leaf-dark: #d7f2a3;
+        --leaf-soft: #2b1b38;
+        --sun: #ffad42;
+        --ink: #f7efe2;
+        --muted: #b9a9c7;
+        --line: #4b355b;
     }
 
     .stApp {
         background:
-            radial-gradient(circle at 92% 4%, #edf7cf 0, #edf7cf 7rem, transparent 7.1rem),
-            linear-gradient(180deg, #fffdf4 0%, #f7fbf1 100%);
+            radial-gradient(circle at 92% 4%, #ff9f2f 0, #ff9f2f 6.5rem, transparent 6.6rem),
+            radial-gradient(circle at 8% 14%, rgba(118, 70, 150, 0.34) 0, rgba(118, 70, 150, 0.34) 8rem, transparent 8.1rem),
+            linear-gradient(180deg, #171020 0%, #21142d 52%, #120c19 100%);
         color: var(--ink);
     }
 
@@ -55,7 +56,7 @@ st.markdown(
     }
 
     .subtitle {
-        color: #7b837e;
+        color: #c8b6d6;
         font-size: 1rem;
         font-weight: 500;
         line-height: 1.5;
@@ -69,10 +70,10 @@ st.markdown(
     }
 
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        background: rgba(255, 255, 255, 0.88);
+        background: rgba(39, 25, 50, 0.94);
         border: 1px solid var(--line);
         border-radius: 22px;
-        box-shadow: 0 8px 24px rgba(52, 93, 59, 0.07);
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
     }
 
     div[data-testid="stSegmentedControl"] button {
@@ -80,42 +81,42 @@ st.markdown(
         border-radius: 12px !important;
         font-size: 1.14rem !important;
         font-weight: 700;
-        background: #f8fbf4 !important;
-        color: #385443 !important;
-        border-color: #cbdcc7 !important;
+        background: #2a1b36 !important;
+        color: #eadff1 !important;
+        border-color: #5b406b !important;
     }
 
     div[data-testid="stSegmentedControl"] button p {
         font-size: 1.14rem !important;
         font-weight: 750 !important;
-        color: #385443 !important;
+        color: #eadff1 !important;
     }
 
     div[data-testid="stSegmentedControl"] button[aria-pressed="true"] {
-        background: #dff1d9 !important;
-        color: #1f6b37 !important;
-        border-color: #4c9b5d !important;
+        background: #ff9f2f !important;
+        color: #25122f !important;
+        border-color: #ffb65c !important;
     }
 
     div[data-testid="stSegmentedControl"] button[aria-pressed="true"] p {
-        color: #1f6b37 !important;
+        color: #25122f !important;
     }
 
     div[data-testid="stSegmentedControl"] button:hover,
     div[data-testid="stSegmentedControl"] button:active,
     div[data-testid="stSegmentedControl"] button:focus {
-        background: #f8fbf4 !important;
-        color: #385443 !important;
-        border-color: #cbdcc7 !important;
+        background: #2a1b36 !important;
+        color: #eadff1 !important;
+        border-color: #5b406b !important;
         box-shadow: none !important;
     }
 
     div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:hover,
     div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:active,
     div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:focus {
-        background: #dff1d9 !important;
-        color: #1f6b37 !important;
-        border-color: #4c9b5d !important;
+        background: #ff9f2f !important;
+        color: #25122f !important;
+        border-color: #ffb65c !important;
     }
 
     div[data-testid="stButton"] button {
@@ -123,24 +124,24 @@ st.markdown(
         min-height: 3.45rem;
         border: 0;
         border-radius: 16px;
-        background: linear-gradient(135deg, #51ad66, #32884b);
+        background: linear-gradient(135deg, #ffad42, #f17822);
         color: white;
         font-size: 1.08rem;
         font-weight: 800;
-        box-shadow: 0 8px 18px rgba(50, 136, 75, 0.22);
+        box-shadow: 0 8px 20px rgba(241, 120, 34, 0.28);
     }
 
     div[data-testid="stButton"] button:hover {
-        background: linear-gradient(135deg, #51ad66, #32884b);
+        background: linear-gradient(135deg, #ffad42, #f17822);
         color: white;
         border: 0;
     }
 
     div[data-testid="stDateInput"] input {
         border-radius: 12px;
-        background: #ffffff !important;
-        color: #183126 !important;
-        border-color: #cbdcc7 !important;
+        background: #2a1b36 !important;
+        color: #f7efe2 !important;
+        border-color: #5b406b !important;
     }
 
     div[data-testid="stCheckbox"] label p {
@@ -158,7 +159,7 @@ st.markdown(
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        color: var(--leaf-dark);
+        color: #f3c8ff;
         font-size: 1.15rem;
         font-weight: 850;
         margin-bottom: 0.15rem;
@@ -167,20 +168,20 @@ st.markdown(
     .result-banner {
         border-radius: 18px;
         padding: 1rem 1.05rem;
-        background: linear-gradient(135deg, #fff7c9, #ffe99b);
-        border: 1px solid #f1dc7c;
+        background: linear-gradient(135deg, #ffb347, #f47b20);
+        border: 1px solid #ffc56f;
         margin-bottom: 0.7rem;
     }
 
     .result-banner-title {
-        color: #6e5311;
+        color: #2a1334;
         font-size: 1.2rem;
         font-weight: 900;
         margin-bottom: 0.2rem;
     }
 
     .result-banner-note {
-        color: #806d39;
+        color: #4b294f;
         font-size: 0.86rem;
     }
 
@@ -190,7 +191,7 @@ st.markdown(
         gap: 0.55rem;
         font-size: 1.08rem;
         font-weight: 900;
-        color: var(--leaf-dark);
+        color: #f3c8ff;
         margin-bottom: 0.35rem;
     }
 
@@ -198,23 +199,23 @@ st.markdown(
         width: 0.7rem;
         height: 0.7rem;
         border-radius: 99px;
-        background: #66b66f;
+        background: #ff9f2f;
         display: inline-block;
         flex: 0 0 auto;
     }
 
     .task-plant {
-        color: #277541;
+        color: #b9ed7d;
         font-weight: 800;
     }
 
     .task-mushroom {
-        color: #744b2a;
+        color: #ffc56f;
         font-weight: 700;
     }
 
     .task-normal {
-        color: #33483d;
+        color: #eee4f3;
         font-weight: 650;
     }
 
@@ -222,7 +223,7 @@ st.markdown(
         margin-top: 2.5rem;
         padding: 1.2rem 0 0.2rem;
         text-align: center;
-        color: #799174;
+        color: #a995b7;
         font-size: 0.84rem;
         letter-spacing: 0.08rem;
     }
@@ -264,29 +265,29 @@ missions = {
         1: [("走2000步", 0)],
         2: [("種1000朵花", 0), ("摧毀2棵蘑菇", 2)],
         3: [("培育3隻皮克敏", 0), ("摧毀3棵蘑菇", 3)],
-        4: [("種500朵洋桔梗", 0), ("摧毀4棵蘑菇", 4)],
+        4: [("種500朵薊花", 0), ("摧毀4棵蘑菇", 4)],
     },
     3: {
         1: [("走2000步", 0), ("完成2個探險", 0)],
-        2: [("種1500朵白色雞冠花", 0), ("摧毀3棵蘑菇", 3)],
-        3: [("種1500朵紅色雞冠花", 0), ("摧毀4棵蘑菇", 4)],
+        2: [("種1500朵白色萬壽菊", 0), ("摧毀3棵蘑菇", 3)],
+        3: [("種1500朵紅色萬壽菊", 0), ("摧毀4棵蘑菇", 4)],
         4: [
-            ("種1500朵黃色雞冠花", 0),
-            ("種2000朵紅色洋桔梗", 0),
+            ("種1500朵黃色萬壽菊", 0),
+            ("種2000朵紅色薊花", 0),
             ("摧毀5棵蘑菇", 5),
         ],
     },
     4: {
         1: [("完成3個探險", 0), ("摧毀3棵蘑菇", 3)],
-        2: [("種2000朵白色洋桔梗", 0), ("摧毀4棵蘑菇", 4)],
+        2: [("種2000朵白色薊花", 0), ("摧毀4棵蘑菇", 4)],
         3: [
-            ("種2000朵黃色洋桔梗", 0),
-            ("種1000朵藍色雞冠花", 0),
+            ("種2000朵黃色薊花", 0),
+            ("種1000朵紅色萬壽菊", 0),
             ("摧毀4棵蘑菇", 4),
         ],
         4: [
-            ("種2000朵藍色洋桔梗", 0),
-            ("種2500朵雞冠花", 0),
+            ("種2000朵藍色薊花", 0),
+            ("種2500朵萬壽菊", 0),
             ("摧毀5棵蘑菇", 5),
         ],
     },
@@ -396,7 +397,7 @@ def make_schedule(
     return schedule, completed_rounds
 
 
-st.title("皮皮精算師")
+st.title("🎃 皮皮精算師 👻")
 st.markdown(
     '<div class="subtitle">我們並不是以遊戲的心情玩皮克敏的</div>',
     unsafe_allow_html=True,
