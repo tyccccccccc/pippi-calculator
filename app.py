@@ -318,6 +318,59 @@ st.markdown(
         border-color: #654777 !important;
     }
 
+
+    /* ===== v3: Streamlit disabled segmented options =====
+       Streamlit disables options that cannot currently be selected.
+       Its default disabled opacity makes the text nearly invisible.
+    */
+    div[data-testid="stSegmentedControl"] button:disabled,
+    div[data-testid="stSegmentedControl"] button[disabled],
+    div[data-testid="stSegmentedControl"] button[aria-disabled="true"] {
+        opacity: 1 !important;
+        background: #2a1b36 !important;
+        color: #f7efe2 !important;
+        border-color: #654777 !important;
+        -webkit-text-fill-color: #f7efe2 !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button:disabled *,
+    div[data-testid="stSegmentedControl"] button[disabled] *,
+    div[data-testid="stSegmentedControl"] button[aria-disabled="true"] * {
+        opacity: 1 !important;
+        color: #f7efe2 !important;
+        -webkit-text-fill-color: #f7efe2 !important;
+    }
+
+    /* Streamlit/BaseWeb may apply opacity to an ancestor of disabled text */
+    div[data-testid="stSegmentedControl"] [aria-disabled="true"],
+    div[data-testid="stSegmentedControl"] [data-disabled="true"] {
+        opacity: 1 !important;
+    }
+
+    div[data-testid="stSegmentedControl"] [aria-disabled="true"] *,
+    div[data-testid="stSegmentedControl"] [data-disabled="true"] * {
+        opacity: 1 !important;
+        color: #f7efe2 !important;
+        -webkit-text-fill-color: #f7efe2 !important;
+    }
+
+    /* Selected option stays orange even if Streamlit marks siblings disabled */
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"],
+    div[data-testid="stSegmentedControl"] button[data-selected="true"] {
+        opacity: 1 !important;
+        background: #ff9f2f !important;
+        color: #25122f !important;
+        -webkit-text-fill-color: #25122f !important;
+        border-color: #ffc56f !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] *,
+    div[data-testid="stSegmentedControl"] button[data-selected="true"] * {
+        opacity: 1 !important;
+        color: #25122f !important;
+        -webkit-text-fill-color: #25122f !important;
+    }
+
     </style>
     """,
     unsafe_allow_html=True,
