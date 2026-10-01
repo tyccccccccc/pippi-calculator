@@ -17,21 +17,23 @@ st.markdown(
     """
     <style>
     :root {
-        --cream: #171020;
-        --leaf: #9bd36a;
-        --leaf-dark: #d7f2a3;
-        --leaf-soft: #2b1b38;
-        --sun: #ffad42;
-        --ink: #f7efe2;
-        --muted: #b9a9c7;
-        --line: #4b355b;
+        --cream: #fff9f0;
+        --pumpkin: #f28c28;
+        --pumpkin-dark: #d96f12;
+        --purple: #6d3a7c;
+        --purple-dark: #3a2145;
+        --lavender: #f5edf7;
+        --ink: #2d1938;
+        --muted: #76657d;
+        --line: #dccbe2;
+        --leaf: #3f8f4f;
     }
 
     .stApp {
         background:
-            radial-gradient(circle at 92% 4%, #ff9f2f 0, #ff9f2f 6.5rem, transparent 6.6rem),
-            radial-gradient(circle at 8% 14%, rgba(118, 70, 150, 0.34) 0, rgba(118, 70, 150, 0.34) 8rem, transparent 8.1rem),
-            linear-gradient(180deg, #171020 0%, #21142d 52%, #120c19 100%);
+            radial-gradient(circle at 94% 3%, #ffad42 0, #ffad42 6.3rem, transparent 6.4rem),
+            radial-gradient(circle at 3% 11%, #ead8ef 0, #ead8ef 8.5rem, transparent 8.6rem),
+            linear-gradient(180deg, #fff9f0 0%, #fffdf8 100%);
         color: var(--ink);
     }
 
@@ -56,7 +58,7 @@ st.markdown(
     }
 
     .subtitle {
-        color: #c8b6d6;
+        color: #715d79;
         font-size: 1rem;
         font-weight: 500;
         line-height: 1.5;
@@ -70,10 +72,10 @@ st.markdown(
     }
 
     div[data-testid="stVerticalBlockBorderWrapper"] {
-        background: rgba(39, 25, 50, 0.94);
+        background: rgba(255, 255, 255, 0.92);
         border: 1px solid var(--line);
         border-radius: 22px;
-        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+        box-shadow: 0 8px 24px rgba(70, 39, 82, 0.08);
     }
 
     div[data-testid="stSegmentedControl"] button {
@@ -81,42 +83,11 @@ st.markdown(
         border-radius: 12px !important;
         font-size: 1.14rem !important;
         font-weight: 700;
-        background: #2a1b36 !important;
-        color: #eadff1 !important;
-        border-color: #5b406b !important;
     }
 
     div[data-testid="stSegmentedControl"] button p {
         font-size: 1.14rem !important;
         font-weight: 750 !important;
-        color: #eadff1 !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] {
-        background: #ff9f2f !important;
-        color: #25122f !important;
-        border-color: #ffb65c !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] p {
-        color: #25122f !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button:hover,
-    div[data-testid="stSegmentedControl"] button:active,
-    div[data-testid="stSegmentedControl"] button:focus {
-        background: #2a1b36 !important;
-        color: #eadff1 !important;
-        border-color: #5b406b !important;
-        box-shadow: none !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:hover,
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:active,
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:focus {
-        background: #ff9f2f !important;
-        color: #25122f !important;
-        border-color: #ffb65c !important;
     }
 
     div[data-testid="stButton"] button {
@@ -124,24 +95,21 @@ st.markdown(
         min-height: 3.45rem;
         border: 0;
         border-radius: 16px;
-        background: linear-gradient(135deg, #ffad42, #f17822);
-        color: white;
+        background: linear-gradient(135deg, #ffad42, #f28c28);
+        color: #3a2145;
         font-size: 1.08rem;
-        font-weight: 800;
-        box-shadow: 0 8px 20px rgba(241, 120, 34, 0.28);
+        font-weight: 850;
+        box-shadow: 0 8px 18px rgba(242, 140, 40, 0.22);
     }
 
     div[data-testid="stButton"] button:hover {
-        background: linear-gradient(135deg, #ffad42, #f17822);
-        color: white;
+        background: linear-gradient(135deg, #ffb955, #e87c19);
+        color: #2d1938;
         border: 0;
     }
 
     div[data-testid="stDateInput"] input {
         border-radius: 12px;
-        background: #2a1b36 !important;
-        color: #f7efe2 !important;
-        border-color: #5b406b !important;
     }
 
     div[data-testid="stCheckbox"] label p {
@@ -152,14 +120,14 @@ st.markdown(
     details {
         border: 1px solid var(--line) !important;
         border-radius: 18px !important;
-        background: rgba(255, 255, 255, 0.82) !important;
+        background: #ffffff !important;
     }
 
     .section-label {
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        color: #f3c8ff;
+        color: var(--purple);
         font-size: 1.15rem;
         font-weight: 850;
         margin-bottom: 0.15rem;
@@ -168,20 +136,20 @@ st.markdown(
     .result-banner {
         border-radius: 18px;
         padding: 1rem 1.05rem;
-        background: linear-gradient(135deg, #ffb347, #f47b20);
-        border: 1px solid #ffc56f;
+        background: linear-gradient(135deg, #ffe3b5, #ffc66f);
+        border: 1px solid #f2ad4b;
         margin-bottom: 0.7rem;
     }
 
     .result-banner-title {
-        color: #2a1334;
+        color: #59301b;
         font-size: 1.2rem;
         font-weight: 900;
         margin-bottom: 0.2rem;
     }
 
     .result-banner-note {
-        color: #4b294f;
+        color: #755138;
         font-size: 0.86rem;
     }
 
@@ -191,7 +159,7 @@ st.markdown(
         gap: 0.55rem;
         font-size: 1.08rem;
         font-weight: 900;
-        color: #f3c8ff;
+        color: var(--purple);
         margin-bottom: 0.35rem;
     }
 
@@ -199,23 +167,23 @@ st.markdown(
         width: 0.7rem;
         height: 0.7rem;
         border-radius: 99px;
-        background: #ff9f2f;
+        background: var(--pumpkin);
         display: inline-block;
         flex: 0 0 auto;
     }
 
     .task-plant {
-        color: #b9ed7d;
+        color: #367b43;
         font-weight: 800;
     }
 
     .task-mushroom {
-        color: #ffc56f;
-        font-weight: 700;
+        color: #b55b18;
+        font-weight: 750;
     }
 
     .task-normal {
-        color: #eee4f3;
+        color: #493b50;
         font-weight: 650;
     }
 
@@ -223,7 +191,7 @@ st.markdown(
         margin-top: 2.5rem;
         padding: 1.2rem 0 0.2rem;
         text-align: center;
-        color: #a995b7;
+        color: #927d99;
         font-size: 0.84rem;
         letter-spacing: 0.08rem;
     }
@@ -248,129 +216,6 @@ st.markdown(
             font-size: 1.08rem !important;
         }
     }
-
-    /* ===== Halloween segmented controls: high-contrast override ===== */
-    div[data-testid="stSegmentedControl"] button,
-    div[data-testid="stSegmentedControl"] button[kind="segmented_control"] {
-        background: #2a1b36 !important;
-        color: #f7efe2 !important;
-        border-color: #654777 !important;
-        box-shadow: none !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button *,
-    div[data-testid="stSegmentedControl"] button p,
-    div[data-testid="stSegmentedControl"] button span {
-        color: #f7efe2 !important;
-        opacity: 1 !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"],
-    div[data-testid="stSegmentedControl"] button[data-selected="true"] {
-        background: #ff9f2f !important;
-        color: #25122f !important;
-        border-color: #ffc56f !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] *,
-    div[data-testid="stSegmentedControl"] button[data-selected="true"] *,
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] p,
-    div[data-testid="stSegmentedControl"] button[data-selected="true"] p {
-        color: #25122f !important;
-        opacity: 1 !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button:hover,
-    div[data-testid="stSegmentedControl"] button:focus,
-    div[data-testid="stSegmentedControl"] button:active {
-        background: #382447 !important;
-        color: #ffffff !important;
-        border-color: #7c5a8e !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button:hover *,
-    div[data-testid="stSegmentedControl"] button:focus *,
-    div[data-testid="stSegmentedControl"] button:active * {
-        color: #ffffff !important;
-        opacity: 1 !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:hover,
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:focus,
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:active,
-    div[data-testid="stSegmentedControl"] button[data-selected="true"]:hover {
-        background: #ff9f2f !important;
-        color: #25122f !important;
-        border-color: #ffc56f !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:hover *,
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:focus *,
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:active *,
-    div[data-testid="stSegmentedControl"] button[data-selected="true"]:hover * {
-        color: #25122f !important;
-    }
-
-    /* Date input: keep it in the Halloween palette */
-    div[data-testid="stDateInput"] input {
-        background: #2a1b36 !important;
-        color: #f7efe2 !important;
-        border-color: #654777 !important;
-    }
-
-
-    /* ===== v3: Streamlit disabled segmented options =====
-       Streamlit disables options that cannot currently be selected.
-       Its default disabled opacity makes the text nearly invisible.
-    */
-    div[data-testid="stSegmentedControl"] button:disabled,
-    div[data-testid="stSegmentedControl"] button[disabled],
-    div[data-testid="stSegmentedControl"] button[aria-disabled="true"] {
-        opacity: 1 !important;
-        background: #2a1b36 !important;
-        color: #f7efe2 !important;
-        border-color: #654777 !important;
-        -webkit-text-fill-color: #f7efe2 !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button:disabled *,
-    div[data-testid="stSegmentedControl"] button[disabled] *,
-    div[data-testid="stSegmentedControl"] button[aria-disabled="true"] * {
-        opacity: 1 !important;
-        color: #f7efe2 !important;
-        -webkit-text-fill-color: #f7efe2 !important;
-    }
-
-    /* Streamlit/BaseWeb may apply opacity to an ancestor of disabled text */
-    div[data-testid="stSegmentedControl"] [aria-disabled="true"],
-    div[data-testid="stSegmentedControl"] [data-disabled="true"] {
-        opacity: 1 !important;
-    }
-
-    div[data-testid="stSegmentedControl"] [aria-disabled="true"] *,
-    div[data-testid="stSegmentedControl"] [data-disabled="true"] * {
-        opacity: 1 !important;
-        color: #f7efe2 !important;
-        -webkit-text-fill-color: #f7efe2 !important;
-    }
-
-    /* Selected option stays orange even if Streamlit marks siblings disabled */
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"],
-    div[data-testid="stSegmentedControl"] button[data-selected="true"] {
-        opacity: 1 !important;
-        background: #ff9f2f !important;
-        color: #25122f !important;
-        -webkit-text-fill-color: #25122f !important;
-        border-color: #ffc56f !important;
-    }
-
-    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] *,
-    div[data-testid="stSegmentedControl"] button[data-selected="true"] * {
-        opacity: 1 !important;
-        color: #25122f !important;
-        -webkit-text-fill-color: #25122f !important;
-    }
-
     </style>
     """,
     unsafe_allow_html=True,
