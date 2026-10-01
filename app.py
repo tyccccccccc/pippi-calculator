@@ -248,6 +248,76 @@ st.markdown(
             font-size: 1.08rem !important;
         }
     }
+
+    /* ===== Halloween segmented controls: high-contrast override ===== */
+    div[data-testid="stSegmentedControl"] button,
+    div[data-testid="stSegmentedControl"] button[kind="segmented_control"] {
+        background: #2a1b36 !important;
+        color: #f7efe2 !important;
+        border-color: #654777 !important;
+        box-shadow: none !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button *,
+    div[data-testid="stSegmentedControl"] button p,
+    div[data-testid="stSegmentedControl"] button span {
+        color: #f7efe2 !important;
+        opacity: 1 !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"],
+    div[data-testid="stSegmentedControl"] button[data-selected="true"] {
+        background: #ff9f2f !important;
+        color: #25122f !important;
+        border-color: #ffc56f !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] *,
+    div[data-testid="stSegmentedControl"] button[data-selected="true"] *,
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"] p,
+    div[data-testid="stSegmentedControl"] button[data-selected="true"] p {
+        color: #25122f !important;
+        opacity: 1 !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button:hover,
+    div[data-testid="stSegmentedControl"] button:focus,
+    div[data-testid="stSegmentedControl"] button:active {
+        background: #382447 !important;
+        color: #ffffff !important;
+        border-color: #7c5a8e !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button:hover *,
+    div[data-testid="stSegmentedControl"] button:focus *,
+    div[data-testid="stSegmentedControl"] button:active * {
+        color: #ffffff !important;
+        opacity: 1 !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:hover,
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:focus,
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:active,
+    div[data-testid="stSegmentedControl"] button[data-selected="true"]:hover {
+        background: #ff9f2f !important;
+        color: #25122f !important;
+        border-color: #ffc56f !important;
+    }
+
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:hover *,
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:focus *,
+    div[data-testid="stSegmentedControl"] button[aria-pressed="true"]:active *,
+    div[data-testid="stSegmentedControl"] button[data-selected="true"]:hover * {
+        color: #25122f !important;
+    }
+
+    /* Date input: keep it in the Halloween palette */
+    div[data-testid="stDateInput"] input {
+        background: #2a1b36 !important;
+        color: #f7efe2 !important;
+        border-color: #654777 !important;
+    }
+
     </style>
     """,
     unsafe_allow_html=True,
