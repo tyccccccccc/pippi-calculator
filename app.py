@@ -1,4 +1,5 @@
 import streamlit as st
+import re
 from datetime import datetime, timedelta, timezone
 
 
@@ -365,6 +366,62 @@ def make_schedule(
     return schedule, completed_rounds
 
 
+
+def compact_action(action):
+    match = re.search(r"摧毀蘑菇(\d+)棵", action)
+    if match:
+        return f"{match.group(1)}菇"
+
+    task = action
+    if task.startswith("完成「") and task.endswith("」"):
+        task = task[3:-1]
+
+    match = re.fullmatch(r"走(\d+)步", task)
+    if match:
+        return f"{match.group(1)}步"
+
+    match = re.fullmatch(r"培育(\d+)隻皮克敏", task)
+    if match:
+        return f"{match.group(1)}皮"
+
+    match = re.fullmatch(r"完成(\d+)個探險", task)
+    if match:
+        return f"{match.group(1)}探"
+
+    match = re.fullmatch(r"種(\d+)朵(.+)", task)
+    if match:
+        count, flower = match.groups()
+        flower_names = {
+            "花": "花",
+            "薊花": "薊花",
+            "白色薊花": "白薊",
+            "紅色薊花": "紅薊",
+            "黃色薊花": "黃薊",
+            "藍色薊花": "藍薊",
+            "萬壽菊": "菊",
+            "白色萬壽菊": "白菊",
+            "紅色萬壽菊": "紅菊",
+            "黃色萬壽菊": "黃菊",
+            "藍色萬壽菊": "藍菊",
+        }
+        return f"{count}{flower_names.get(flower, flower)}"
+
+    return task
+
+
+def make_export_text(schedule):
+    weekday_short = ["一", "二", "三", "四", "五", "六", "日"]
+    lines = []
+    for day in schedule:
+        if not day["actions"]:
+            continue
+        date = day["date"]
+        date_text = f"{date.month}/{date.day}({weekday_short[date.weekday()]})"
+        compact_actions = [compact_action(action) for action in day["actions"]]
+        lines.append(f"{date_text} " + "/".join(compact_actions))
+    return "\n".join(lines)
+
+
 st.title("🎃 皮皮精算師 👻")
 st.markdown(
     '<div class="subtitle">我們並不是以遊戲的心情玩皮克敏的</div>',
@@ -475,6 +532,19 @@ if calculate:
             )
 
         st.caption("一般任務預設可在排定當天完成；實際進度可能因種花或步數順延。")
+
+    export_text = make_export_text(schedule)
+
+    st.markdown("#### 📄 匯出每日排程")
+    st.code(export_text, language=None)
+
+    st.download_button(
+        "下載每日排程 TXT",
+        data=export_text.encode("utf-8-sig"),
+        file_name=f"pikmin_schedule_{selected_date.strftime('%Y%m%d')}.txt",
+        mime="text/plain",
+        use_container_width=True,
+    )
 
     with st.expander("查看每日詳細安排", expanded=False):
         weekday_names = ["週一", "週二", "週三", "週四", "週五", "週六", "週日"]
