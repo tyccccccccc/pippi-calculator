@@ -1,3 +1,4 @@
+# 2026-11-02：完整替換版（桌布在頁尾，長按圖片儲存）
 import streamlit as st
 import re
 from io import BytesIO
@@ -731,26 +732,18 @@ if saved_result is not None and saved_result[0] == query_signature:
 
 
 st.markdown("---")
-st.markdown("### 🖼️ 十一月桌布下載")
-with st.expander("🖼️ 下載十一月純底圖", expanded=False):
 st.markdown("### 🖼️ 十一月桌布")
 st.caption("直接長按圖片存到手機相簿，不需要下載檔案，也不需要截圖。")
 with st.expander("🖼️ 十一月純底圖（點開後長按儲存）", expanded=False):
     try:
         background_png = wallpaper_background()
         st.image(background_png, caption="深秋花園・純底圖", width=260)
-        st.download_button(
-            "下載純底圖 PNG", data=background_png,
-            file_name="pikmin_202611_garden.png", mime="image/png",
-            key="download_background", use_container_width=True,
-        )
         st.caption("長按上方圖片，選擇「儲存影像」或「加入照片」，即可存到相簿。")
     except OSError:
         st.error("找不到桌布底圖，請確認 assets 資料夾已與 app.py 一起上傳。")
 
 
 if saved_result is not None and saved_result[0] == query_signature:
-    st.markdown("#### 🖼️ 下載含進度文字的桌布")
     st.markdown("#### 🖼️ 含進度文字的桌布")
     st.caption("每張可放 1～14 天，預設兩週。內容與上方 TXT 相同，文字上方保留時鐘與小工具空間。")
     # 換一次查詢結果才重設日期；調整位置或下載不會清掉計算結果。
@@ -780,7 +773,6 @@ if saved_result is not None and saved_result[0] == query_signature:
     elif wallpaper_end < wallpaper_start:
         st.warning("結束日期不可早於開始日期。")
     elif (wallpaper_end - wallpaper_start).days >= 14:
-        st.warning("每張桌布最多 14 天，請縮短日期範圍；其餘日期可以另外下載一張。")
         st.warning("每張桌布最多 14 天，請縮短日期範圍；其餘日期可以另外製作一張。")
     else:
         try:
@@ -790,19 +782,11 @@ if saved_result is not None and saved_result[0] == query_signature:
                     wallpaper_background(), wallpaper_font_bytes(),
                 )
             st.image(wallpaper_png, caption="桌布預覽", width=300)
-            st.download_button(
-                "下載含進度桌布 PNG", data=wallpaper_png,
-                file_name=(f"pikmin_wallpaper_{wallpaper_start:%Y%m%d}_"
-                           f"{wallpaper_end:%Y%m%d}.png"),
-                mime="image/png", key="download_schedule_wallpaper",
-                use_container_width=True,
-            )
             st.caption("長按上方圖片，選擇「儲存影像」或「加入照片」，即可存到相簿。")
         except (OSError, RuntimeError, ValueError) as exc:
             st.error(f"桌布暫時無法產生：{exc}")
 
 else:
-    st.caption("想下載含進度的桌布，請先在上方計算排程。")
     st.caption("想製作含進度的桌布，請先在上方計算排程。")
 
 
