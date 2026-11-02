@@ -1,6 +1,6 @@
 import streamlit as st
 import re
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 
 
 st.set_page_config(
@@ -18,23 +18,23 @@ st.markdown(
     """
     <style>
     :root {
-        --cream: #fff9f0;
-        --pumpkin: #f28c28;
-        --pumpkin-dark: #d96f12;
-        --purple: #6d3a7c;
-        --purple-dark: #3a2145;
-        --lavender: #f5edf7;
-        --ink: #2d1938;
-        --muted: #76657d;
-        --line: #dccbe2;
-        --leaf: #3f8f4f;
+        --cream: #fffaf0;
+        --caramel: #c97c36;
+        --caramel-dark: #a85f28;
+        --sage: #617b58;
+        --sage-dark: #344631;
+        --sage-light: #edf2e5;
+        --ink: #384332;
+        --muted: #777767;
+        --line: #dedfc9;
+        --leaf: #647f56;
     }
 
     .stApp {
         background:
-            radial-gradient(circle at 94% 3%, #ffad42 0, #ffad42 6.3rem, transparent 6.4rem),
-            radial-gradient(circle at 3% 11%, #ead8ef 0, #ead8ef 8.5rem, transparent 8.6rem),
-            linear-gradient(180deg, #fff9f0 0%, #fffdf8 100%);
+            radial-gradient(circle at 94% 3%, #edbb78 0, #edbb78 6.3rem, transparent 6.4rem),
+            radial-gradient(circle at 3% 11%, #e4ebd7 0, #e4ebd7 8.5rem, transparent 8.6rem),
+            linear-gradient(180deg, #fffaf0 0%, #fffdf8 100%);
         color: var(--ink);
     }
 
@@ -59,7 +59,7 @@ st.markdown(
     }
 
     .subtitle {
-        color: #715d79;
+        color: #68745c;
         font-size: 1rem;
         font-weight: 500;
         line-height: 1.5;
@@ -76,7 +76,7 @@ st.markdown(
         background: rgba(255, 255, 255, 0.92);
         border: 1px solid var(--line);
         border-radius: 22px;
-        box-shadow: 0 8px 24px rgba(70, 39, 82, 0.08);
+        box-shadow: 0 8px 24px rgba(91, 107, 68, 0.08);
     }
 
     div[data-testid="stSegmentedControl"] button {
@@ -96,16 +96,16 @@ st.markdown(
         min-height: 3.45rem;
         border: 0;
         border-radius: 16px;
-        background: linear-gradient(135deg, #ffad42, #f28c28);
-        color: #3a2145;
+        background: linear-gradient(135deg, #edbb78, #c97c36);
+        color: #344631;
         font-size: 1.08rem;
         font-weight: 850;
-        box-shadow: 0 8px 18px rgba(242, 140, 40, 0.22);
+        box-shadow: 0 8px 18px rgba(201, 124, 54, 0.20);
     }
 
     div[data-testid="stButton"] button:hover {
-        background: linear-gradient(135deg, #ffb955, #e87c19);
-        color: #2d1938;
+        background: linear-gradient(135deg, #f0c88e, #bb7133);
+        color: #384332;
         border: 0;
     }
 
@@ -128,7 +128,7 @@ st.markdown(
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        color: var(--purple);
+        color: var(--sage);
         font-size: 1.15rem;
         font-weight: 850;
         margin-bottom: 0.15rem;
@@ -160,7 +160,7 @@ st.markdown(
         gap: 0.55rem;
         font-size: 1.08rem;
         font-weight: 900;
-        color: var(--purple);
+        color: var(--sage);
         margin-bottom: 0.35rem;
     }
 
@@ -168,7 +168,7 @@ st.markdown(
         width: 0.7rem;
         height: 0.7rem;
         border-radius: 99px;
-        background: var(--pumpkin);
+        background: var(--caramel);
         display: inline-block;
         flex: 0 0 auto;
     }
@@ -184,7 +184,7 @@ st.markdown(
     }
 
     .task-normal {
-        color: #493b50;
+        color: #525c46;
         font-weight: 650;
     }
 
@@ -192,7 +192,7 @@ st.markdown(
         margin-top: 2.5rem;
         padding: 1.2rem 0 0.2rem;
         text-align: center;
-        color: #927d99;
+        color: #83866e;
         font-size: 0.84rem;
         letter-spacing: 0.08rem;
     }
@@ -234,29 +234,29 @@ missions = {
         1: [("走2000步", 0)],
         2: [("種1000朵花", 0), ("摧毀2棵蘑菇", 2)],
         3: [("培育3隻皮克敏", 0), ("摧毀3棵蘑菇", 3)],
-        4: [("種500朵薊花", 0), ("摧毀4棵蘑菇", 4)],
+        4: [("種500朵天竺葵", 0), ("摧毀4棵蘑菇", 4)],
     },
     3: {
         1: [("走2000步", 0), ("完成2個探險", 0)],
-        2: [("種1500朵白色萬壽菊", 0), ("摧毀3棵蘑菇", 3)],
-        3: [("種1500朵紅色萬壽菊", 0), ("摧毀4棵蘑菇", 4)],
+        2: [("種1500朵白色鼠尾草", 0), ("摧毀3棵蘑菇", 3)],
+        3: [("種1500朵紅色鼠尾草", 0), ("摧毀4棵蘑菇", 4)],
         4: [
-            ("種1500朵黃色萬壽菊", 0),
-            ("種2000朵紅色薊花", 0),
+            ("種1500朵黃色鼠尾草", 0),
+            ("種2000朵紅色天竺葵", 0),
             ("摧毀5棵蘑菇", 5),
         ],
     },
     4: {
         1: [("完成3個探險", 0), ("摧毀3棵蘑菇", 3)],
-        2: [("種2000朵白色薊花", 0), ("摧毀4棵蘑菇", 4)],
+        2: [("種2000朵白色天竺葵", 0), ("摧毀4棵蘑菇", 4)],
         3: [
-            ("種2000朵黃色薊花", 0),
-            ("種1000朵紅色萬壽菊", 0),
+            ("種2000朵黃色天竺葵", 0),
+            ("種1000朵藍色鼠尾草", 0),
             ("摧毀4棵蘑菇", 4),
         ],
         4: [
-            ("種2000朵藍色薊花", 0),
-            ("種2500朵萬壽菊", 0),
+            ("種2000朵藍色天竺葵", 0),
+            ("種2500朵鼠尾草", 0),
             ("摧毀5棵蘑菇", 5),
         ],
     },
@@ -393,16 +393,16 @@ def compact_action(action):
         count, flower = match.groups()
         flower_names = {
             "花": "花",
-            "薊花": "薊花",
-            "白色薊花": "白薊",
-            "紅色薊花": "紅薊",
-            "黃色薊花": "黃薊",
-            "藍色薊花": "藍薊",
-            "萬壽菊": "菊",
-            "白色萬壽菊": "白菊",
-            "紅色萬壽菊": "紅菊",
-            "黃色萬壽菊": "黃菊",
-            "藍色萬壽菊": "藍菊",
+            "天竺葵": "葵",
+            "白色天竺葵": "白葵",
+            "紅色天竺葵": "紅葵",
+            "黃色天竺葵": "黃葵",
+            "藍色天竺葵": "藍葵",
+            "鼠尾草": "鼠",
+            "白色鼠尾草": "白鼠",
+            "紅色鼠尾草": "紅鼠",
+            "黃色鼠尾草": "黃鼠",
+            "藍色鼠尾草": "藍鼠",
         }
         return f"{count}{flower_names.get(flower, flower)}"
 
@@ -422,7 +422,8 @@ def make_export_text(schedule):
     return "\n".join(lines)
 
 
-st.title("🎃 皮皮精算師 👻")
+st.title("🌿 皮皮精算師 🌼")
+st.caption("2026 年 11 月・深秋花園｜鼠尾草 × 天竺葵")
 st.markdown(
     '<div class="subtitle">我們並不是以遊戲的心情玩皮克敏的</div>',
     unsafe_allow_html=True,
@@ -432,12 +433,24 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+with st.container(border=True):
+    st.markdown('<div class="section-label">🍂 十一月花園記事</div>', unsafe_allow_html=True)
+    st.markdown("**11/14、11/15｜社群日**")
+    st.markdown("**11/27、11/30｜巨菇加碼**")
+    st.caption("活動日期僅供提醒；排程維持每天 3 次免費蘑菇，一般任務預設當天完成。")
+
 st.write("")
 
 with st.container(border=True):
     st.markdown('<div class="section-label">🌿 目前進度</div>', unsafe_allow_html=True)
 
-    selected_date = st.date_input("查詢日期", value=today, format="YYYY/MM/DD")
+    selected_date = st.date_input(
+        "查詢日期",
+        value=min(max(today, date(2026, 11, 1)), date(2026, 11, 30)),
+        min_value=date(2026, 11, 1),
+        max_value=date(2026, 11, 30),
+        format="YYYY/MM/DD",
+    )
 
     round_number = st.segmented_control(
         "第幾輪",
@@ -550,6 +563,10 @@ if calculate:
         weekday_names = ["週一", "週二", "週三", "週四", "週五", "週六", "週日"]
 
         for day in schedule:
+            if day["date"].day in (14, 15):
+                st.caption("🌼 社群日")
+            if day["date"].day in (27, 30):
+                st.caption("🍄 巨菇加碼")
             weekday = weekday_names[day["date"].weekday()]
             date_text = f"{day['date'].month}/{day['date'].day}（{weekday}）"
 
