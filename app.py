@@ -556,18 +556,6 @@ with st.container(border=True):
     st.markdown("**11/27、11/30｜巨菇加碼**")
     st.caption("活動日期僅供提醒；排程維持每天 3 次免費蘑菇，一般任務預設當天完成。")
 
-with st.expander("🖼️ 下載十一月純底圖", expanded=False):
-    try:
-        background_png = wallpaper_background()
-        st.image(background_png, caption="深秋花園・純底圖", width=260)
-        st.download_button(
-            "下載純底圖 PNG", data=background_png,
-            file_name="pikmin_202611_garden.png", mime="image/png",
-            key="download_background", use_container_width=True,
-        )
-    except OSError:
-        st.error("找不到桌布底圖，請確認 assets 資料夾已與 app.py 一起上傳。")
-
 st.write("")
 
 with st.container(border=True):
@@ -700,52 +688,6 @@ if saved_result is not None and saved_result[0] == query_signature:
         use_container_width=True,
     )
 
-    st.markdown("#### 🖼️ 下載含進度文字的桌布")
-    st.caption("每張可放 1～14 天，預設兩週。內容與上方 TXT 相同，文字上方保留時鐘與小工具空間。")
-    # 換一次查詢結果才重設日期；調整位置或下載不會清掉計算結果。
-    if st.session_state.get("wallpaper_query") != query_signature:
-        st.session_state["wallpaper_start"] = schedule[0]["date"]
-        st.session_state["wallpaper_end"] = min(
-            schedule[0]["date"] + timedelta(days=13), schedule[-1]["date"]
-        )
-        st.session_state["wallpaper_query"] = query_signature
-    start_column, end_column = st.columns(2)
-    with start_column:
-        wallpaper_start = st.date_input(
-            "桌布開始日期", min_value=schedule[0]["date"],
-            max_value=schedule[-1]["date"], key="wallpaper_start", format="MM/DD",
-        )
-    with end_column:
-        wallpaper_end = st.date_input(
-            "桌布結束日期", min_value=schedule[0]["date"],
-            max_value=schedule[-1]["date"], key="wallpaper_end", format="MM/DD",
-        )
-    wallpaper_top = st.slider(
-        "文字往下移（數字越大，越靠下）", min_value=40, max_value=48, value=42,
-        format="%d%%", key="wallpaper_top",
-    )
-    if wallpaper_end < wallpaper_start:
-        st.warning("結束日期不可早於開始日期。")
-    elif (wallpaper_end - wallpaper_start).days >= 14:
-        st.warning("每張桌布最多 14 天，請縮短日期範圍；其餘日期可以另外下載一張。")
-    else:
-        try:
-            with st.spinner("正在製作桌布…"):
-                wallpaper_png = make_wallpaper(
-                    schedule, wallpaper_start, wallpaper_end, wallpaper_top,
-                    wallpaper_background(), wallpaper_font_bytes(),
-                )
-            st.image(wallpaper_png, caption="桌布預覽", width=300)
-            st.download_button(
-                "下載含進度桌布 PNG", data=wallpaper_png,
-                file_name=(f"pikmin_wallpaper_{wallpaper_start:%Y%m%d}_"
-                           f"{wallpaper_end:%Y%m%d}.png"),
-                mime="image/png", key="download_schedule_wallpaper",
-                use_container_width=True,
-            )
-        except (OSError, RuntimeError, ValueError) as exc:
-            st.error(f"桌布暫時無法產生：{exc}")
-
     with st.expander("查看每日詳細安排", expanded=False):
         weekday_names = ["週一", "週二", "週三", "週四", "週五", "週六", "週日"]
 
@@ -786,6 +728,74 @@ if saved_result is not None and saved_result[0] == query_signature:
                     f"當日結束：第{day['round']}輪・"
                     f"第{day['stage']}階段・第{day['group']}小關"
                 )
+
+
+st.markdown("---")
+st.markdown("### 🖼️ 十一月桌布下載")
+with st.expander("🖼️ 下載十一月純底圖", expanded=False):
+    try:
+        background_png = wallpaper_background()
+        st.image(background_png, caption="深秋花園・純底圖", width=260)
+        st.download_button(
+            "下載純底圖 PNG", data=background_png,
+            file_name="pikmin_202611_garden.png", mime="image/png",
+            key="download_background", use_container_width=True,
+        )
+    except OSError:
+        st.error("找不到桌布底圖，請確認 assets 資料夾已與 app.py 一起上傳。")
+
+
+if saved_result is not None and saved_result[0] == query_signature:
+    st.markdown("#### 🖼️ 下載含進度文字的桌布")
+    st.caption("每張可放 1～14 天，預設兩週。內容與上方 TXT 相同，文字上方保留時鐘與小工具空間。")
+    # 換一次查詢結果才重設日期；調整位置或下載不會清掉計算結果。
+    if st.session_state.get("wallpaper_query") != query_signature:
+        st.session_state["wallpaper_start"] = schedule[0]["date"]
+        st.session_state["wallpaper_end"] = min(
+            schedule[0]["date"] + timedelta(days=13), schedule[-1]["date"]
+        )
+        st.session_state["wallpaper_query"] = query_signature
+    start_column, end_column = st.columns(2)
+    with start_column:
+        wallpaper_start = st.date_input(
+            "桌布開始日期", value=None, min_value=schedule[0]["date"],
+            max_value=schedule[-1]["date"], key="wallpaper_start", format="YYYY/MM/DD",
+        )
+    with end_column:
+        wallpaper_end = st.date_input(
+            "桌布結束日期", value=None, min_value=schedule[0]["date"],
+            max_value=schedule[-1]["date"], key="wallpaper_end", format="YYYY/MM/DD",
+        )
+    wallpaper_top = st.slider(
+        "文字往下移（數字越大，越靠下）", min_value=40, max_value=48, value=42,
+        format="%d%%", key="wallpaper_top",
+    )
+    if wallpaper_start is None or wallpaper_end is None:
+        st.info("請選擇桌布的開始與結束日期。")
+    elif wallpaper_end < wallpaper_start:
+        st.warning("結束日期不可早於開始日期。")
+    elif (wallpaper_end - wallpaper_start).days >= 14:
+        st.warning("每張桌布最多 14 天，請縮短日期範圍；其餘日期可以另外下載一張。")
+    else:
+        try:
+            with st.spinner("正在製作桌布…"):
+                wallpaper_png = make_wallpaper(
+                    schedule, wallpaper_start, wallpaper_end, wallpaper_top,
+                    wallpaper_background(), wallpaper_font_bytes(),
+                )
+            st.image(wallpaper_png, caption="桌布預覽", width=300)
+            st.download_button(
+                "下載含進度桌布 PNG", data=wallpaper_png,
+                file_name=(f"pikmin_wallpaper_{wallpaper_start:%Y%m%d}_"
+                           f"{wallpaper_end:%Y%m%d}.png"),
+                mime="image/png", key="download_schedule_wallpaper",
+                use_container_width=True,
+            )
+        except (OSError, RuntimeError, ValueError) as exc:
+            st.error(f"桌布暫時無法產生：{exc}")
+
+else:
+    st.caption("想下載含進度的桌布，請先在上方計算排程。")
 
 
 st.markdown(
